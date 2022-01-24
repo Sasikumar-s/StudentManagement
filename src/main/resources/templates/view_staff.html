@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<meta charset="ISO-8859-1">
+<title>Staff Details</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+  <div class="container-fluid">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Staff Upload</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="#">View Department</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+<div align="center" class="table-responsive">
+        <table class="table table-bordered">
+            <tr class="bg-primary">
+                <th>Staff ID</th>
+                <th>Staff First Name</th>
+                <th>Last Name</th>
+                <th> Mobile Number</th>
+                <th>Email ID</th>
+                <th>Experience</th>
+                <th>Department ID</th>
+                <th>Department Name</th>
+                <th>HOD Name</th>
+                <th><div align="center" sec:authorize="hasAnyAuthority('ADMIN')">
+                    Operations</div>
+                    </th>
+                
+            </tr>
+            <tr class="active" th:each="staff : ${staff}">
+            	<td th:text="${staff.StaffId}"> id</td>
+                <td th:text="${staff.firstName}"> id</td>
+                <td th:text="${staff.lastName}">Department name</td>
+                <td th:text="${staff.mobileNumber}">HOD name</td>
+                <td th:text="${staff.email}">HOD name</td>
+                <td th:text="${staff.experience}">HOD name</td>
+                <td th:text="${staff.department.deptId}">HOD name</td>
+                <td th:text="${staff.department.deptName}">HOD name</td>
+                <td th:text="${staff.department.hodName}">HOD name</td>
+                  <td>
+                    <div sec:authorize="hasAnyAuthority('ADMIN')">
+                        <a class="btn btn-warning" th:href="@{'/edit/' + ${staff.StaffId}}">Edit</a>
+                        <a class="btn btn-danger" th:href="@{'/delete/' + ${staff.StaffId}}">Delete</a>
+                        <a class="btn btn-success" th:href="@{/viewdept}">Add Staff</a>
+                    </div>
+                 <div>
+                 	
+                 </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+</body>
+</html>
